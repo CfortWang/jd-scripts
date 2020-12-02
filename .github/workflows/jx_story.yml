@@ -6,7 +6,7 @@ name: jx_story
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0/60 * * * ?'
+    - cron: '30 * * * *'
   watch:
     types: started
   repository_dispatch:
