@@ -1,5 +1,6 @@
 /*
 苹果抽奖机
+脚本会给内置的码进行助力
 活动于2020-12-14日结束
 活动地址：https://h5.m.jd.com/babelDiy/Zeus/2zwQnu4WHRNfqMSdv69UPgpZMnE2/index.html/
 已支持IOS双京东账号,Node.js支持N个京东账号
