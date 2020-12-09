@@ -6,7 +6,7 @@ name: jd_apple_live
 on:
   workflow_dispatch:
   schedule:
-    - cron: '10 * * * *'
+    - cron: '5 * * * *'
   watch:
     types: started
   repository_dispatch:
