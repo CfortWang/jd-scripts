@@ -28,7 +28,7 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
 const randomCount = $.isNode() ? 20 : 5;
-const inviteCodes = [`9521a4a4-c735-4fa8-ac5a-bdeb8db9d2d6@f11140f5-9da1-4021-ad17-de59e16a5eeb@5046e158-0340-4349-a65d-a1758bf2ddab`,'9521a4a4-c735-4fa8-ac5a-bdeb8db9d2d6@f11140f5-9da1-4021-ad17-de59e16a5eeb@5046e158-0340-4349-a65d-a1758bf2ddab', '9521a4a4-c735-4fa8-ac5a-bdeb8db9d2d6@f11140f5-9da1-4021-ad17-de59e16a5eeb@5046e158-0340-4349-a65d-a1758bf2ddab'];
+const inviteCodes = [`9bb419af-939a-43b0-9c8b-302ddc08167e@3b1bcac4-70a0-4e48-b646-3b5b2151c04f@e8eb0d47-f31d-4edc-a957-f1d201f7d11f`,'9bb419af-939a-43b0-9c8b-302ddc08167e@3b1bcac4-70a0-4e48-b646-3b5b2151c04f@e8eb0d47-f31d-4edc-a957-f1d201f7d11f', '9bb419af-939a-43b0-9c8b-302ddc08167e@3b1bcac4-70a0-4e48-b646-3b5b2151c04f@e8eb0d47-f31d-4edc-a957-f1d201f7d11f'];
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
 if ($.isNode()) {
