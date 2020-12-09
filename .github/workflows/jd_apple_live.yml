@@ -1,7 +1,7 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: jx_story
+name: jd_apple_live
 
 on:
   workflow_dispatch:
@@ -10,7 +10,7 @@ on:
   watch:
     types: started
   repository_dispatch:
-    types: jx_story
+    types: jd_apple_live
 jobs:
   build:
 
@@ -35,9 +35,9 @@ jobs:
       - name: npm install
         run: |
           npm install
-      - name: '运行 【京喜金牌厂长】'
+      - name: '运行 【苹果抽奖机】'
         run: |
-          node jx_story.js
+          node jd_apple_live.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
           JD_DEBUG: ${{ secrets.JD_DEBUG }}
