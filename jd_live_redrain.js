@@ -106,6 +106,7 @@ function getRedRain() {
               let act = data.data.iconArea.filter(vo=>vo['type']==="platform_red_packege_rain")[0]
               let url = act.data.activityUrl
               $.activityId = url.substr(url.indexOf("id=") + 3)
+              console.log($.activityId)
               $.startTime = act.startTime
               $.endTime = act.endTime
               console.log(`下一场红包雨开始时间：${new Date(act.startTime)}`)
@@ -160,7 +161,7 @@ function receiveRedRain() {
 function taskPostUrl(function_id, body = {}) {
   return {
     url: `https://api.m.jd.com/client.action?functionId=${function_id}`,
-    body: 'area=12_904_908_57903&body=%7B%22liveId%22%3A%222956873%22%7D&build=167408&client=apple&clientVersion=9.2.0&d_brand=apple&d_model=iPhone10%2C2&eid=eidIF3CF0112RTIyQTVGQTEtRDVCQy00Qg%3D%3D6HAJa9%2B/4Vedgo62xKQRoAb47%2Bpyu1EQs/6971aUvk0BQAsZLyQAYeid%2BPgbJ9BQoY1RFtkLCLP5OMqU&isBackground=N&openudid=53f4d9c70c1c81f1c8769d2fe2fef0190a3f60d2&osVersion=14.2&partner=TF&rfs=0000&scope=01&screen=1242%2A2208&sign=4fefb7b802a8b1d7ae4529ec32b0bda8&st=1607470636080&sv=121&uts=0f31TVRjBSvNs/AdsIxcW3vOKTLS9m1Bkfr/wtDAnp1q%2BaUi8exzmBNoKgjayIUv6x2Kyf6ccTzo3NpoIr0XxE05GZbP8oOh2s6rmFPTTjPhnIs%2BkxDNq6jbLa/OXerurB%2BctY3Sg9OWaR6%2BnF4XsNtDZrNmKU57jtBoJWI8O2D/lA%2B%2B7sFMhxC%2BxMi9yfyM%2BT%2Bu5DbTBDJCOR1QUIScQw%3D%3D&uuid=hjudwgohxzVu96krv/T6Hg%3D%3D',
+    body: 'area=12_904_908_57903&body=%7B%22liveId%22%3A%222997252%22%7D&build=167408&client=apple&clientVersion=9.2.0&d_brand=apple&d_model=iPhone10%2C2&eid=eidIF3CF0112RTIyQTVGQTEtRDVCQy00Qg%3D%3D6HAJa9%2B/4Vedgo62xKQRoAb47%2Bpyu1EQs/6971aUvk0BQAsZLyQAYeid%2BPgbJ9BQoY1RFtkLCLP5OMqU&isBackground=N&joycious=194&lang=zh_CN&networkType=wifi&networklibtype=JDNetworkBaseAF&openudid=53f4d9c70c1c81f1c8769d2fe2fef0190a3f60d2&osVersion=14.2&partner=TF&rfs=0000&scope=01&screen=1242%2A2208&sign=706f847a6252a4fe03869b2901bb0815&st=1607643593651&sv=110&uts=0f31TVRjBSsDGINmdElmZlgBxMZQifcxhB/BdpQKugK3pigFDsPY3x%2BIXMm0vOlDa%2BujRn1irmu%2BjbgWg0C%2B9Qd9NZvImI0ZQc/fN8EoflUT3Sb6VQm0WwdM77kwyb56x3lxaqFyeh3r1KEOHCier47iIpyuyvVQVG2KbTKocIo0CS9xpYtzkQr1dLgceiIho7GvOrMiBQ%2BtyUe/1wcqtg%3D%3D&uuid=hjudwgohxzVu96krv/T6Hg%3D%3D',
     headers: {
       'Host': 'api.m.jd.com',
       'content-type': 'application/x-www-form-urlencoded',
