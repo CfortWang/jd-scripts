@@ -22,9 +22,9 @@ cron "10 0 * * *" script-path=https://raw.githubusercontent.com/lxk0301/jd_scrip
  */
 const $ = new Env('金榜年终奖');
 
-const notify = $.isNode() ? require('./sendNotify') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
 let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
 const randomCount = $.isNode() ? 20 : 5;
 //IOS等用户直接用NobyDa的jd cookie
@@ -35,7 +35,12 @@ if ($.isNode()) {
   })
   if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
 } else {
-  cookiesArr.push(...[$.getdata('CookieJD'), $.getdata('CookieJD2')]);
+  let cookiesData = $.getdata('CookiesJD') || "[]";
+  cookiesData = jsonParse(cookiesData);
+  cookiesArr = cookiesData.map(item => item.cookie);
+  cookiesArr.reverse();
+  cookiesArr.push(...[$.getdata('CookieJD2'), $.getdata('CookieJD')]);
+  cookiesArr.reverse();
 }
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
 $.newShareCodes = ['P04z54XCjVUnIaW5m9cZ2Wt2C1Dw1YPyvwEMy8', 'P04z54XCjVUnIaW5m9cZx6-nA4z4VajB0qrqQ', 'P04z54XCjVUnIaW5m9cZ2b83Hwcx1gncuX6vYU'];
@@ -293,6 +298,17 @@ function safeGet(data) {
     console.log(e);
     console.log(`京东服务器访问数据为空，请检查自身设备网络情况`);
     return false;
+  }
+}
+function jsonParse(str) {
+  if (typeof str == "string") {
+    try {
+      return JSON.parse(str);
+    } catch (e) {
+      console.log(e);
+      $.msg($.name, '', '不要在BoxJS手动复制粘贴修改cookie')
+      return [];
+    }
   }
 }
 // prettier-ignore

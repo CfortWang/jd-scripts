@@ -1,30 +1,30 @@
 /*
-秒杀红包雨，可以获取3次，一天运行一次即可
-活动时间：2020-12-1 到 2020-12-31
-活动入口：首页👉秒杀👉往下拉(手指向上滑动)👉可以看到狂撒2亿京东
-更新地址：https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_ms_redrain.js
+直播红包雨
+每天0,9,11,13,15,17,19,20,21,23可领，每日上限未知
+活动时间：2020-12-7 到 2020-12-12
+更新地址：https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_live_redrain.js
 已支持IOS双京东账号, Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, 小火箭，JSBox, Node.js
 ============Quantumultx===============
 [task_local]
-#秒杀红包雨
-10 7 * * * https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_ms_redrain.js, tag=秒杀红包雨, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_redPacket.png, enabled=true
+#直播红包雨
+0 0,9,11,13,15,17,19,20,21,23 * * * https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_live_redrain.js, tag=直播红包雨, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_redPacket.png, enabled=true
 
 ================Loon==============
 [Script]
-cron "10 7 * * *" script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_ms_redrain.js, tag=秒杀红包雨
+cron "0 0,9,11,13,15,17,19,20,21,23 * * *" script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_live_redrain.js, tag=直播红包雨
 
 ===============Surge=================
-秒杀红包雨 = type=cron,cronexp="10 7 * * *",wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_ms_redrain.js
+直播红包雨 = type=cron,cronexp="0 0,9,11,13,15,17,19,20,21,23 * * *",wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_live_redrain.js
 
 ============小火箭=========
-秒杀红包雨 = type=cron,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_ms_redrain.js, cronexpr="10 7 * * *", timeout=200, enable=true
+直播红包雨 = type=cron,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_live_redrain.js, cronexpr="0 0,9,11,13,15,17,19,20,21,23 * * *", timeout=200, enable=true
  */
-const $ = new Env('秒杀红包雨');
+const $ = new Env('直播红包雨');
 
-const notify = $.isNode() ? require('./sendNotify') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
 let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
 const randomCount = $.isNode() ? 20 : 5;
 //IOS等用户直接用NobyDa的jd cookie
@@ -33,7 +33,8 @@ if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])
   })
-  if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
+  if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {
+  };
 } else {
   let cookiesData = $.getdata('CookiesJD') || "[]";
   cookiesData = jsonParse(cookiesData);
@@ -48,6 +49,8 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/', {"open-url": "https://bean.m.jd.com/"});
     return;
   }
+  await getRedRain();
+	if(!$.activityId) return
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -64,24 +67,28 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
         if ($.isNode()) {
           await notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
         } else {
-          $.setdata('', `CookieJD${i ? i + 1 : "" }`);//cookie失效，故清空cookie。$.setdata('', `CookieJD${i ? i + 1 : "" }`);//cookie失效，故清空cookie。
+          $.setdata('', `CookieJD${i ? i + 1 : ""}`);//cookie失效，故清空cookie。$.setdata('', `CookieJD${i ? i + 1 : "" }`);//cookie失效，故清空cookie。
         }
         continue
       }
-      for(let i=0;i<3;++i){
-        await getRedRain();
-        await $.wait(5000); //防止黑号
+      let nowTs = new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 + 8 * 60 * 60 * 1000
+      // console.log(nowTs, $.startTime, $.endTime)
+      if ($.startTime <= nowTs && nowTs < $.endTime) {
+        await receiveRedRain();
+      } else {
+        console.log(`不在红包雨时间之内`)
+        message += `不在红包雨时间之内`
       }
       await showMsg();
     }
   }
 })()
-    .catch((e) => {
-      $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
-    })
-    .finally(() => {
-      $.done();
-    })
+  .catch((e) => {
+    $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
+  })
+  .finally(() => {
+    $.done();
+  })
 
 function showMsg() {
   return new Promise(resolve => {
@@ -89,9 +96,40 @@ function showMsg() {
     resolve()
   })
 }
+
 function getRedRain() {
   return new Promise(resolve => {
-    const body = {"actId":"RRA318jCtaXhZJgiLryM1iydEhc7Jna"};
+    $.get({
+      url: "https://gitee.com/shylocks/updateTeam/raw/main/jd_live_redRain.json",
+      headers:{
+        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
+      }}, (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`1111${JSON.stringify(err)}`)
+          console.log(`${$.name} API请求失败，请检查网路重试`)
+        } else {
+          if (safeGet(data)) {
+            data = JSON.parse(data);
+            $.activityId = data.activityId
+            $.startTime = data.startTime
+            $.endTime = data.endTime
+            console.log(`下一场红包雨开始时间：${new Date(data.startTime)}`)
+            console.log(`下一场红包雨结束时间：${new Date(data.endTime)}`)
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve();
+      }
+    })
+  })
+}
+
+function receiveRedRain() {
+  return new Promise(resolve => {
+    const body = {"actId": $.activityId};
     $.get(taskUrl('noahRedRainLottery', body), (err, resp, data) => {
       try {
         if (err) {
@@ -103,7 +141,7 @@ function getRedRain() {
             if (data.subCode === '0') {
               console.log(`领取成功，获得${JSON.stringify(data.lotteryResult)}`)
               // message+= `领取成功，获得${JSON.stringify(data.lotteryResult)}\n`
-              message+= `${data.lotteryResult.jPeasList[0].ext}:${(data.lotteryResult.jPeasList[0].quantity)}京豆\n`
+              message += `${data.lotteryResult.jPeasList[0].ext}:${(data.lotteryResult.jPeasList[0].quantity)}京豆\n`
 
             } else if (data.subCode === '8') {
               console.log(`今日次数已满`)
@@ -121,9 +159,10 @@ function getRedRain() {
     })
   })
 }
+
 function taskUrl(function_id, body = {}) {
   return {
-    url: `${JD_API_HOST}?functionId=${function_id}&body=${escape(JSON.stringify(body))}&client=wh5&clientVersion=1.0.0&_=${new Date().getTime() + new Date().getTimezoneOffset()*60*1000 + 8*60*60*1000}`,
+    url: `${JD_API_HOST}?functionId=${function_id}&body=${escape(JSON.stringify(body))}&client=wh5&clientVersion=1.0.0&_=${new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 + 8 * 60 * 60 * 1000}`,
     headers: {
       "Accept": "*/*",
       "Accept-Encoding": "gzip, deflate, br",
@@ -137,6 +176,7 @@ function taskUrl(function_id, body = {}) {
     }
   }
 }
+
 function TotalBean() {
   return new Promise(async resolve => {
     const options = {
@@ -177,6 +217,7 @@ function TotalBean() {
     })
   })
 }
+
 function safeGet(data) {
   try {
     if (typeof JSON.parse(data) == "object") {
