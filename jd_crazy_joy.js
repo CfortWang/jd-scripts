@@ -30,7 +30,7 @@ const JD_API_HOST = 'https://api.m.jd.com/';
 const notify = $.isNode() ? require('./sendNotify') : '';
 let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
 let cookiesArr = [], cookie = '', message = '';
-const inviteCodes = ['55lFOAwHTv0IDeUFaXcvLKt9zd5YaBeE', '55lFOAwHTv0IDeUFaXcvLKt9zd5YaBeE', '55lFOAwHTv0IDeUFaXcvLKt9zd5YaBeE'];
+const inviteCodes = ['55lFOAwHTv0IDeUFaXcvLKt9zd5YaBeE@pvOQ2ax8eXiek0eU21vfLqt9zd5YaBeE@saRTLXOLj5Wl0rJw0tY3RA==', '55lFOAwHTv0IDeUFaXcvLKt9zd5YaBeE@pvOQ2ax8eXiek0eU21vfLqt9zd5YaBeE@saRTLXOLj5Wl0rJw0tY3RA==', '55lFOAwHTv0IDeUFaXcvLKt9zd5YaBeE@pvOQ2ax8eXiek0eU21vfLqt9zd5YaBeE@saRTLXOLj5Wl0rJw0tY3RA=='];
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
