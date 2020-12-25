@@ -43,7 +43,7 @@ if ($.isNode()) {
   cookiesArr = cookiesArr.filter(item => item !== "" && item !== null && item !== undefined);
 }
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
-const inviteCodes = [`T0225KkcRUscpF2BdR6gl_IDJgCjVUnoaW5kRrbA@T0205KkcPlhYhy2jQ3uH3LdzCjVUnoaW5kRrbA@T0225KkcRhoY9QKFIxKlk6YIcQCjVUnoaW5kRrbA`, `T0225KkcRUscpF2BdR6gl_IDJgCjVUnoaW5kRrbA@T0205KkcPlhYhy2jQ3uH3LdzCjVUnoaW5kRrbA@T0225KkcRhoY9QKFIxKlk6YIcQCjVUnoaW5kRrbA`, `T0225KkcRUscpF2BdR6gl_IDJgCjVUnoaW5kRrbA@T0205KkcPlhYhy2jQ3uH3LdzCjVUnoaW5kRrbA@T0225KkcRhoY9QKFIxKlk6YIcQCjVUnoaW5kRrbA`];
+const inviteCodes = [`T0225KkcRUscpF2BdR6gl_IDJgCjVUnoaW5kRrbA@T0205KkcPlhYhy2jQ3uH3LdzCjVUnoaW5kRrbA@T0225KkcRhoY9QKFIxKlk6YIcQCjVUnoaW5kRrbA@T016uf16RhoQ9lPSc1CjCjVUnoaW5kRrbA@T0225KkcRxsZ_VfVcRv3nf9YcgCjVUnoaW5kRrbA`, `T0225KkcRUscpF2BdR6gl_IDJgCjVUnoaW5kRrbA@T0205KkcPlhYhy2jQ3uH3LdzCjVUnoaW5kRrbA@T0225KkcRhoY9QKFIxKlk6YIcQCjVUnoaW5kRrbA@T016uf16RhoQ9lPSc1CjCjVUnoaW5kRrbA@T0225KkcRxsZ_VfVcRv3nf9YcgCjVUnoaW5kRrbA`, `T0225KkcRUscpF2BdR6gl_IDJgCjVUnoaW5kRrbA@T0205KkcPlhYhy2jQ3uH3LdzCjVUnoaW5kRrbA@T0225KkcRhoY9QKFIxKlk6YIcQCjVUnoaW5kRrbA@T016uf16RhoQ9lPSc1CjCjVUnoaW5kRrbA@T0225KkcRxsZ_VfVcRv3nf9YcgCjVUnoaW5kRrbA`];
 !(async () => {
   await requireConfig();
   if (!cookiesArr[0]) {
