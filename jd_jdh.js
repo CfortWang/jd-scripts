@@ -72,7 +72,7 @@ $.newShareCodes = [ '904b2a8c4db9a295e0f4b03d3d0b20cf', '1df932d56f10664e8689e82
 //   for (let i = 0; i < cookiesArr.length; i++) {
 //     if (cookiesArr[i]) {
 //       cookie = cookiesArr[i];
-//       await helpFriends()
+      await helpFriends()
 //     }
 //   }
 })()
