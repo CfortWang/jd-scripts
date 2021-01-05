@@ -862,10 +862,8 @@ function getFactoryIdByPin(pin) {
 }
 async function tuanActivity() {
   const tuanConfig = await QueryActiveConfig();
-  console.log(tuanConfig)
   if (tuanConfig && tuanConfig.ret === 0) {
     const { activeId, surplusOpenTuanNum, tuanId } = tuanConfig['data']['userTuanInfo'];
-    console.log(tuanConfig['data']['userTuanInfo']);
     console.log(`今日剩余开团次数：${surplusOpenTuanNum}次`);
     $.surplusOpenTuanNum = surplusOpenTuanNum;
     if (!tuanId && surplusOpenTuanNum > 0) {
@@ -1102,7 +1100,6 @@ function QueryAllTuan() {
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
-            console.log(data)
             if (data['ret'] === 0) {
               const { tuanInfo } = data;
               for (let item of tuanInfo) {
