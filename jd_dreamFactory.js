@@ -1029,7 +1029,8 @@ async function joinLeaderTuan() {
   $.tuanIdS = null;
   if (!$.tuanIdS) await updateTuanIdsCDN('https://gitee.com/shylocks/updateTeam/raw/main/jd_updateFactoryTuanId.json');
   console.log('吐了');
-  console.log($, $.tuanIdS, $.tuanIdS.tuanIds)
+  console.log('\n');
+  console.log(`${$.tuanIdS}\n${$.tuanIdS.tuanIds}`)
   if ($.tuanIdS && $.tuanIdS.tuanIds) {
     for (let tuanId of $.tuanIdS.tuanIds) {
       if (!tuanId) continue
