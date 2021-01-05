@@ -1020,17 +1020,16 @@ function CreateTuan() {
   })
 }
 async function joinLeaderTuan() {
-    console.log(`cnml : ${$.tuanIdS, $.tuanIdS.tuanIds}`);
   if ($.tuanIdS && $.tuanIdS.tuanIds) {
     for (let tuanId of $.tuanIdS.tuanIds) {
       if (!tuanId) continue
       await JoinTuan(tuanId);
-      console.log(`fuck====${tuanId}`);
     }
   }
   $.tuanIdS = null;
   if (!$.tuanIdS) await updateTuanIdsCDN('https://gitee.com/shylocks/updateTeam/raw/main/jd_updateFactoryTuanId.json');
-  console.log(`cnml : ${$.tuanIdS, $.tuanIdS.tuanIds}`);
+  console.log('吐了');
+  console.log($, $.tuanIdS, $.tuanIdS.tuanIds)
   if ($.tuanIdS && $.tuanIdS.tuanIds) {
     for (let tuanId of $.tuanIdS.tuanIds) {
       if (!tuanId) continue
