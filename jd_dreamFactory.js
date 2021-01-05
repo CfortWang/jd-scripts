@@ -1020,18 +1020,22 @@ function CreateTuan() {
   })
 }
 async function joinLeaderTuan() {
+    console.log(`cnml : ${$.tuanIdS, $.tuanIdS.tuanIds}`);
   if ($.tuanIdS && $.tuanIdS.tuanIds) {
     for (let tuanId of $.tuanIdS.tuanIds) {
       if (!tuanId) continue
       await JoinTuan(tuanId);
+      console.log(`fuck====${tuanId}`);
     }
   }
   $.tuanIdS = null;
   if (!$.tuanIdS) await updateTuanIdsCDN('https://gitee.com/shylocks/updateTeam/raw/main/jd_updateFactoryTuanId.json');
+  console.log(`cnml : ${$.tuanIdS, $.tuanIdS.tuanIds}`);
   if ($.tuanIdS && $.tuanIdS.tuanIds) {
     for (let tuanId of $.tuanIdS.tuanIds) {
       if (!tuanId) continue
       await JoinTuan(tuanId);
+      console.log(`fuck====${tuanId}`);
     }
   }
 }
@@ -1101,7 +1105,7 @@ function QueryAllTuan() {
             if (data['ret'] === 0) {
               const { tuanInfo } = data;
               for (let item of tuanInfo) {
-                if (item.tuanNum !== item.realTuanNum) {
+                if (item.tuanNum === item.realTuanNum) {
                   // console.log(`参加团主【${item.tuanLeader}】已成功`)
                   const { userInfo } = item;
                   for (let item2 of userInfo) {
