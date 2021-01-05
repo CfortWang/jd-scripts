@@ -1101,7 +1101,7 @@ function QueryAllTuan() {
             if (data['ret'] === 0) {
               const { tuanInfo } = data;
               for (let item of tuanInfo) {
-                if (item.tuanNum === item.realTuanNum) {
+                if (item.tuanNum !== item.realTuanNum) {
                   // console.log(`参加团主【${item.tuanLeader}】已成功`)
                   const { userInfo } = item;
                   for (let item2 of userInfo) {
