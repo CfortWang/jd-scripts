@@ -31,7 +31,7 @@ const JD_API_HOST = 'https://m.jingxi.com';
 const notify = $.isNode() ? require('./sendNotify') : '';
 let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
 const randomCount = $.isNode() ? 20 : 5;
-let tuanActiveId = `6S9y4sJUfA2vPQP6TLdVIQ==`;
+let tuanActiveId = `t2cdKwg2QPBzAqd5KMCNHg==`;
 const jxOpenUrl = `openjd://virtual?params=%7B%20%22category%22:%20%22jump%22,%20%22des%22:%20%22m%22,%20%22url%22:%20%22https://wqsd.jd.com/pingou/dream_factory/index.html%22%20%7D`;
 let cookiesArr = [], cookie = '', message = '';
 const inviteCodes = ['V5LkjP4WRyjeCKR9VRwcRX0bBuTz7MEK0-E99EJ7u0k=@0WtCMPNq7jekehT6d3AbFw==', 'PDPM257r_KuQhil2Y7koNw==', "gB99tYLjvPcEFloDgamoBw==", '-OvElMzqeyeGBWazWYjI1Q==', 'GFwo6PntxDHH95ZRzZ5uAg=='];
@@ -862,8 +862,10 @@ function getFactoryIdByPin(pin) {
 }
 async function tuanActivity() {
   const tuanConfig = await QueryActiveConfig();
+  console.log(tuanConfig)
   if (tuanConfig && tuanConfig.ret === 0) {
     const { activeId, surplusOpenTuanNum, tuanId } = tuanConfig['data']['userTuanInfo'];
+    console.log(tuanConfig['data']['userTuanInfo']);
     console.log(`今日剩余开团次数：${surplusOpenTuanNum}次`);
     $.surplusOpenTuanNum = surplusOpenTuanNum;
     if (!tuanId && surplusOpenTuanNum > 0) {
@@ -1095,6 +1097,7 @@ function QueryAllTuan() {
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
+            console.log(data)
             if (data['ret'] === 0) {
               const { tuanInfo } = data;
               for (let item of tuanInfo) {
