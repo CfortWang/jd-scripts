@@ -68,13 +68,13 @@ $.newShareCodes = [ '904b2a8c4db9a295e0f4b03d3d0b20cf', '1df932d56f10664e8689e82
     }
   }
   // 帮助作者，把作者助力码放到用户助力码之后
-//   await getAuthorShareCode('https://gitee.com/shylocks/updateTeam/raw/main/jd_jdh.json');
-//   for (let i = 0; i < cookiesArr.length; i++) {
-//     if (cookiesArr[i]) {
-//       cookie = cookiesArr[i];
+  await getAuthorShareCode('https://gitee.com/shylocks/updateTeam/raw/main/jd_jdh.json');
+  for (let i = 0; i < cookiesArr.length; i++) {
+    if (cookiesArr[i]) {
+      cookie = cookiesArr[i];
       await helpFriends()
-//     }
-//   }
+    }
+  }
 })()
   .catch((e) => {
     $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
