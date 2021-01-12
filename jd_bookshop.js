@@ -27,11 +27,8 @@ let cookiesArr = [], cookie = '', message;
 const ACT_ID = 'dz2010100034444201', shareUuid = '28a699ac78d74aa3b31f7103597f8927'
 
 let inviteCodes = [
-  '3b7aecfdf75540ed8692146ae8809c71@be97d875d0b54247a01fb62818ca18b7@c25ed0a855544ab0a2c1afb2649eb65b@058e097a819145d288507ca00b106279@543b5ecd35554aa2b6dbd3ec267c8b33',
-  '3b7aecfdf75540ed8692146ae8809c71@be97d875d0b54247a01fb62818ca18b7@c25ed0a855544ab0a2c1afb2649eb65b@058e097a819145d288507ca00b106279@543b5ecd35554aa2b6dbd3ec267c8b33',
-  '3b7aecfdf75540ed8692146ae8809c71@be97d875d0b54247a01fb62818ca18b7@c25ed0a855544ab0a2c1afb2649eb65b@058e097a819145d288507ca00b106279@543b5ecd35554aa2b6dbd3ec267c8b33',
-  '3b7aecfdf75540ed8692146ae8809c71@be97d875d0b54247a01fb62818ca18b7@c25ed0a855544ab0a2c1afb2649eb65b@058e097a819145d288507ca00b106279@543b5ecd35554aa2b6dbd3ec267c8b33',
-  '3b7aecfdf75540ed8692146ae8809c71@be97d875d0b54247a01fb62818ca18b7@c25ed0a855544ab0a2c1afb2649eb65b@058e097a819145d288507ca00b106279@543b5ecd35554aa2b6dbd3ec267c8b33'
+  '28a699ac78d74aa3b31f7103597f8927@2f14ee9c92954cf79829320dd482bf49@fdf827db272543d88dbb51a505c2e869@ce2536153a8742fb9e8754a9a7d361da@38ba4e7ba8074b78851e928af2b4f6b2',
+  '28a699ac78d74aa3b31f7103597f8927@2f14ee9c92954cf79829320dd482bf49@fdf827db272543d88dbb51a505c2e869'
 ]
 
 if ($.isNode()) {
@@ -689,10 +686,18 @@ function requireConfig() {
   return new Promise(resolve => {
     console.log(`开始获取${$.name}配置文件\n`);
     //Node.js用户请在jdCookie.js处填写京东ck;
-    const shareCodes = []
+    let shareCodes = []
     console.log(`共${cookiesArr.length}个京东账号\n`);
     $.shareCodesArr = [];
     if ($.isNode()) {
+      //自定义助力码
+      if (process.env.BOOKSHOP_SHARECODES) {
+        if (process.env.BOOKSHOP_SHARECODES.indexOf('\n') > -1) {
+          shareCodes = process.env.BOOKSHOP_SHARECODES.split('\n');
+        } else {
+          shareCodes = process.env.BOOKSHOP_SHARECODES.split('&');
+        }
+      }
       Object.keys(shareCodes).forEach((item) => {
         if (shareCodes[item]) {
           $.shareCodesArr.push(shareCodes[item])
