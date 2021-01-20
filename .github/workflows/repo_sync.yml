@@ -36,7 +36,7 @@ jobs:
         if: env.dst_key
         with:
           src: github/LXK9301
-          dst: gitee/LXK9301
+          dst: gitee/lxk0301
           static_list: "jd_scripts"
           dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
           dst_token: ${{ secrets.GITEE_TOKEN }}
